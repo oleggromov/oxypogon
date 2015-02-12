@@ -10,7 +10,7 @@ module.exports = function (jadeOptions) {
 		}
 
 		if (file.isStream()) {
-			cb(new gutil.PluginError('gulp-markdown', 'Streaming not supported'));
+			cb(new gutil.PluginError('pipe-article', 'Streaming not supported'));
 			return;
 		}
 
