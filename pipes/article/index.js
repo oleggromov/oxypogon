@@ -16,7 +16,7 @@ module.exports = function (jadeOptions) {
 
 		var html = file.contents.toString();
 		var options = extractOptions(html);
-		options.content = html;
+		options.content = stripOptions(html);
 
 		var article = jade.compileFile('src/pages/' + options.template + '/index.jade', jadeOptions);
 		delete options.template;
@@ -28,9 +28,14 @@ module.exports = function (jadeOptions) {
 	});
 };
 
+var optionsRegexp = /^<!---\s+((.+\n+)+)-->/;
 
 function extractOptions (htmlString) {
-	var match = htmlString.match(/^<!---\s+((.+\n+)+)-->/);
+	var match = htmlString.match(optionsRegexp);
 
 	return match ? JSON.parse(match[1]) : {};
+}
+
+function stripOptions (htmlString) {
+	return htmlString.replace(optionsRegexp, '');
 }
