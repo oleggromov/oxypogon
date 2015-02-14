@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var markdown = require('gulp-markdown');
 var jade = require('gulp-jade');
-var article = require('./pipes/article');
+var data = require('gulp-data');
 
 var to = 'build/';
 var jadeOptions = {
@@ -10,6 +10,7 @@ var jadeOptions = {
 };
 
 gulp.task('articles', function() {
+	var article = require('./helpers/article');
 	var from = 'src/content/**/*.md';
 
 	gulp.src(from)
@@ -18,10 +19,37 @@ gulp.task('articles', function() {
 		.pipe(gulp.dest(to));
 });
 
-gulp.task('jade', function() {
+gulp.task('list', function() {
+	var _ = require('lodash');
+	var previews = require('./helpers/previews');
+	var articles = [];
+
+	var options = _.cloneDeep(jadeOptions);
+
+	gulp.src('src/content/useful/**/*.md')
+		.pipe(previews(articles))
+		.pipe(data(sortAndBuild));
+
+	function sortAndBuild () {
+		var sortedArticles = _.sortBy(articles, function(article) {
+			return -(new Date(article.date));
+		});
+
+		gulp.src('src/pages/index.jade')
+			.pipe(jade(_.assign(options, {
+				locals: {
+					articles: sortedArticles
+				}
+			})))
+			.pipe(gulp.dest(to));
+	}
+});
+
+gulp.task('static', function() {
 	var from = [
 		'src/pages/**/*.jade',
-		'!src/pages/useful/**/*.jade'
+		'!src/pages/useful/**/*.jade',
+		'!src/pages/index.jade'
 	];
 
 	gulp.src(from)
@@ -30,4 +58,4 @@ gulp.task('jade', function() {
 });
 
 
-gulp.task('default', ['articles', 'jade']);
+gulp.task('default', ['articles', 'list', 'static']);

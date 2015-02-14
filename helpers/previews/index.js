@@ -1,0 +1,35 @@
+var through = require('through2');
+var meta = require('../meta');
+var _ = require('lodash');
+var path = require('path');
+
+module.exports = function(previews) {
+	return through.obj(function(file, enc, callback) {
+		if (file.isNull()) {
+			callback(null, file);
+			return;
+		}
+
+		if (file.isStream()) {
+			callback(new gutil.PluginError('pipe-article', 'Streaming not supported'));
+			return;
+		}
+
+		var source = file.contents.toString();
+		var articleMeta = meta.extract(source);
+
+		var preview = _.pick(articleMeta, [
+			'title',
+			'date',
+			'preview',
+			'more'
+		]);
+
+		var filePath = path.dirname(file.path);
+		preview.url = filePath.replace(file.cwd + '/src/content', '');
+
+		previews.push(preview);
+
+		callback(null, file);
+	});
+};

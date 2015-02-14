@@ -1,6 +1,7 @@
 var jade = require('jade');
 var through = require('through2');
 var gutil = require('gulp-util');
+var meta = require('../meta');
 
 module.exports = function (jadeOptions) {
 	return through.obj(function(file, enc, cb) {
@@ -15,27 +16,18 @@ module.exports = function (jadeOptions) {
 		}
 
 		var html = file.contents.toString();
-		var options = extractOptions(html);
-		options.content = stripOptions(html);
+		var options = meta.extract(html);
+		options.content = meta.strip(html);
 
-		var article = jade.compileFile('src/pages/' + options.template + '/index.jade', jadeOptions);
+		var articleTemplate = jade.compileFile('src/pages/' + options.template + '/index.jade', jadeOptions);
 		delete options.template;
 
-		file.contents = new Buffer(article(options));
+		file.contents = new Buffer(articleTemplate(options));
 		file.path = gutil.replaceExtension(file.path, '.html');
 
 		cb(null, file);
 	});
 };
 
-var optionsRegexp = /^<!---\s+((.+\n+)+)-->/;
 
-function extractOptions (htmlString) {
-	var match = htmlString.match(optionsRegexp);
 
-	return match ? JSON.parse(match[1]) : {};
-}
-
-function stripOptions (htmlString) {
-	return htmlString.replace(optionsRegexp, '');
-}
