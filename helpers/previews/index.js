@@ -26,7 +26,7 @@ module.exports = function(previews) {
 		]);
 
 		var filePath = path.dirname(file.path);
-		preview.url = filePath.replace(file.cwd + '/src/content', '');
+		preview.url = filePath.replace(file.cwd + '/src/content', '') + '/';
 
 		var tokens = marked.lexer(source);
 		preview.preview = getPreview(tokens);

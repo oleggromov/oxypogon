@@ -19,37 +19,38 @@ gulp.task('articles', function() {
 		.pipe(gulp.dest(to));
 });
 
-gulp.task('list', function() {
+gulp.task('index', function() {
 	var _ = require('lodash');
 	var previews = require('./helpers/previews');
 	var articles = [];
 
 	var options = _.cloneDeep(jadeOptions);
 
-	gulp.src('src/content/useful/**/*.md')
+	gulp.src('src/content/articles/**/*.md')
 		.pipe(previews(articles))
 		.pipe(data(sortAndBuild));
 
-	function sortAndBuild () {
+	function sortAndBuild() {
 		var sortedArticles = _.sortBy(articles, function(article) {
 			return -(new Date(article.date));
 		});
 
-		gulp.src('src/pages/index.jade')
+		gulp.src('src/pages/articles/index.jade')
 			.pipe(jade(_.assign(options, {
 				locals: {
 					articles: sortedArticles
 				}
 			})))
-			.pipe(gulp.dest(to));
+			.pipe(gulp.dest(to + 'articles/'));
 	}
 });
 
 gulp.task('static', function() {
 	var from = [
 		'src/pages/**/*.jade',
-		'!src/pages/useful/**/*.jade',
-		'!src/pages/index.jade'
+		'!src/pages/articles/**/*.jade',
+		'!src/pages/article/*.jade',
+		'!src/pages/index/*.jade'
 	];
 
 	gulp.src(from)
@@ -58,4 +59,4 @@ gulp.task('static', function() {
 });
 
 
-gulp.task('default', ['articles', 'list', 'static']);
+gulp.task('default', ['articles', 'index', 'static']);
