@@ -1,5 +1,4 @@
 var gulp = require('gulp');
-var markdown = require('gulp-markdown');
 var jade = require('gulp-jade');
 var data = require('gulp-data');
 
@@ -14,14 +13,13 @@ gulp.task('articles', function() {
 	var from = 'src/content/**/*.md';
 
 	gulp.src(from)
-		.pipe(markdown())
 		.pipe(article(jadeOptions))
 		.pipe(gulp.dest(to));
 });
 
 gulp.task('index', function() {
 	var _ = require('lodash');
-	var previews = require('./helpers/previews');
+	var previews = require('./helpers/previews').getList;
 	var articles = [];
 
 	var options = _.cloneDeep(jadeOptions);

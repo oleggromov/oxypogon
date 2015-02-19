@@ -2,6 +2,7 @@ var jade = require('jade');
 var through = require('through2');
 var gutil = require('gulp-util');
 var meta = require('../meta');
+var markdown = require('../markdown');
 
 module.exports = function (jadeOptions) {
 	return through.obj(function(file, enc, cb) {
@@ -15,9 +16,10 @@ module.exports = function (jadeOptions) {
 			return;
 		}
 
-		var html = file.contents.toString();
-		var options = meta.extract(html);
-		options.content = meta.strip(html);
+		var source = file.contents.toString();
+		var options = meta.extract(source);
+		options.content = meta.strip(markdown.getContent(source));
+		options.title = markdown.getTitle(source);
 
 		var articleTemplate = jade.compileFile('src/pages/' + options.template + '/index.jade', jadeOptions);
 		delete options.template;
@@ -28,6 +30,3 @@ module.exports = function (jadeOptions) {
 		cb(null, file);
 	});
 };
-
-
-
