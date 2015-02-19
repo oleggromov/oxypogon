@@ -33,7 +33,7 @@ gulp.task('index', function() {
 			return -(new Date(article.date));
 		});
 
-		gulp.src('src/pages/articles/index.jade')
+		gulp.src('src/page/articles/index.jade')
 			.pipe(jade(_.assign(options, {
 				locals: {
 					articles: sortedArticles
@@ -45,10 +45,10 @@ gulp.task('index', function() {
 
 gulp.task('static', function() {
 	var from = [
-		'src/pages/**/*.jade',
-		'!src/pages/articles/**/*.jade',
-		'!src/pages/article/*.jade',
-		'!src/pages/index/*.jade'
+		'src/page/**/*.jade',
+		'!src/page/articles/**/*.jade',
+		'!src/page/article/*.jade',
+		'!src/page/index/*.jade'
 	];
 
 	gulp.src(from)

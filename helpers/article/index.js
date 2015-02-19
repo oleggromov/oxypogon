@@ -21,8 +21,8 @@ module.exports = function (jadeOptions) {
 		options.content = meta.strip(markdown.getContent(source));
 		options.title = markdown.getTitle(source);
 
-		var articleTemplate = jade.compileFile('src/pages/' + options.template + '/index.jade', jadeOptions);
-		delete options.template;
+		var articleTemplate = jade.compileFile('src/page/' + options.page + '/index.jade', jadeOptions);
+		delete options.page;
 
 		file.contents = new Buffer(articleTemplate(options));
 		file.path = gutil.replaceExtension(file.path, '.html');
