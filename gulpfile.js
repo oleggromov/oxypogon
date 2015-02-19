@@ -47,7 +47,6 @@ gulp.task('static', function() {
 	var from = [
 		'src/page/**/*.jade',
 		'!src/page/articles/**/*.jade',
-		'!src/page/article/*.jade',
 		'!src/page/index/*.jade'
 	];
 
