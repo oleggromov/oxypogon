@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var jade = require('gulp-jade');
 var data = require('gulp-data');
+var _ = require('lodash');
 
 var to = 'build/';
 var jadeOptions = {
@@ -18,9 +19,21 @@ gulp.task('articles', function() {
 });
 
 gulp.task('index', function() {
-	var _ = require('lodash');
 	var previews = require('./helpers/previews').getList;
 	var articles = [];
+
+	var menu = [
+		{
+			caption: 'Articles',
+			url: '/articles/',
+			active: true,
+		},
+		{
+			caption: 'About me',
+			url: '/about/',
+			active: false
+		}
+	];
 
 	var options = _.cloneDeep(jadeOptions);
 
@@ -36,7 +49,8 @@ gulp.task('index', function() {
 		gulp.src('src/page/articles/index.jade')
 			.pipe(jade(_.assign(options, {
 				locals: {
-					articles: sortedArticles
+					articles: sortedArticles,
+					menu: menu
 				}
 			})))
 			.pipe(gulp.dest(to + 'articles/'));
@@ -50,8 +64,27 @@ gulp.task('static', function() {
 		'!src/page/index/*.jade'
 	];
 
+	var menu = [
+		{
+			caption: 'Articles',
+			url: '/articles/',
+			active: false,
+		},
+		{
+			caption: 'About me',
+			url: '/about/',
+			active: true
+		}
+	];
+
+	var options = _.cloneDeep(jadeOptions);
+
 	gulp.src(from)
-		.pipe(jade(jadeOptions))
+		.pipe(jade(_.assign(options, {
+			locals: {
+				menu: menu
+			}
+		})))
 		.pipe(gulp.dest(to));
 });
 
