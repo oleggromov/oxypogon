@@ -3,6 +3,7 @@ var through = require('through2');
 var gutil = require('gulp-util');
 var meta = require('../meta');
 var markdown = require('../markdown');
+var _ = require('lodash');
 
 module.exports = function (jadeOptions) {
 	return through.obj(function(file, enc, cb) {
@@ -23,6 +24,8 @@ module.exports = function (jadeOptions) {
 
 		var articleTemplate = jade.compileFile('src/page/' + options.page + '/index.jade', jadeOptions);
 		delete options.page;
+
+		options = _.assign(options, jadeOptions.locals);
 
 		file.contents = new Buffer(articleTemplate(options));
 		file.path = gutil.replaceExtension(file.path, '.html');

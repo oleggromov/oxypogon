@@ -9,12 +9,33 @@ var jadeOptions = {
 	pretty: true
 };
 
+var menuGlobal = [
+	{
+		caption: 'Articles',
+		url: '/articles/',
+		active: false,
+	},
+	{
+		caption: 'About me',
+		url: '/about/',
+		active: false
+	}
+];
+
 gulp.task('articles', function() {
 	var article = require('./helpers/article');
 	var from = 'src/content/**/*.md';
 
+	var menu = _.cloneDeep(menuGlobal);
+
+	var options = _.cloneDeep(jadeOptions);
+
 	gulp.src(from)
-		.pipe(article(jadeOptions))
+		.pipe(article(_.assign(options, {
+			locals: {
+				menu: menu
+			}
+		})))
 		.pipe(gulp.dest(to));
 });
 
@@ -22,18 +43,8 @@ gulp.task('index', function() {
 	var previews = require('./helpers/previews').getList;
 	var articles = [];
 
-	var menu = [
-		{
-			caption: 'Articles',
-			url: '/articles/',
-			active: true,
-		},
-		{
-			caption: 'About me',
-			url: '/about/',
-			active: false
-		}
-	];
+	var menu = _.cloneDeep(menuGlobal);
+	menu[0].active = true;
 
 	var options = _.cloneDeep(jadeOptions);
 
@@ -64,18 +75,8 @@ gulp.task('static', function() {
 		'!src/page/index/*.jade'
 	];
 
-	var menu = [
-		{
-			caption: 'Articles',
-			url: '/articles/',
-			active: false,
-		},
-		{
-			caption: 'About me',
-			url: '/about/',
-			active: true
-		}
-	];
+	var menu = _.cloneDeep(menuGlobal);
+	menu[1].active = true;
 
 	var options = _.cloneDeep(jadeOptions);
 
