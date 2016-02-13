@@ -3,6 +3,7 @@ var meta = require('../meta');
 var _ = require('lodash');
 var path = require('path');
 var markdown = require('../markdown');
+var moment = require('moment');
 
 module.exports.getList = function(previews) {
 	return through.obj(function(file, enc, callback) {
@@ -28,6 +29,7 @@ module.exports.getList = function(previews) {
 		preview.url = filePath.replace(file.cwd + '/src/content', '') + '/';
 		preview.preview = markdown.getPreview(source);
 		preview.title = markdown.getTitle(source);
+		preview.date = moment(preview.date).format('LL');
 
 		previews.push(preview);
 
