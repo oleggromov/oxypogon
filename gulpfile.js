@@ -10,7 +10,12 @@ var jadeOptions = {
 
 var menuGlobal = require('./src/menu.js');
 
-gulp.task('articles', function() {
+gulp.task('clean', function () {
+	var del = require('del');
+	return del(to + '*');
+});
+
+gulp.task('articles', ['clean'], function() {
 	var article = require('./helpers/article');
 	var from = 'src/content/**/*.md';
 
@@ -27,7 +32,7 @@ gulp.task('articles', function() {
 		.pipe(gulp.dest(to));
 });
 
-gulp.task('index', function() {
+gulp.task('index', ['clean'], function() {
 	var previews = require('./helpers/previews').getList;
 	var articles = [];
 
@@ -56,26 +61,30 @@ gulp.task('index', function() {
 	}
 });
 
-gulp.task('static', function() {
-	var from = [
-		'src/page/**/*.jade',
-		'!src/page/articles/**/*.jade',
-		'!src/page/index/*.jade'
-	];
+// gulp.task('pages', ['clean'], function() {
+// 	var from = [
+// 		'src/page/**/*.jade',
+// 		'!src/page/articles/**/*.jade',
+// 		'!src/page/index/*.jade'
+// 	];
 
-	var menu = _.cloneDeep(menuGlobal);
-	menu[1].active = true;
+// 	var menu = _.cloneDeep(menuGlobal);
+// 	// menu[1].active = true;
 
-	var options = _.cloneDeep(jadeOptions);
+// 	var options = _.cloneDeep(jadeOptions);
 
-	gulp.src(from)
-		.pipe(jade(_.assign(options, {
-			locals: {
-				menu: menu
-			}
-		})))
-		.pipe(gulp.dest(to));
+// 	gulp.src(from)
+// 		.pipe(jade(_.assign(options, {
+// 			locals: {
+// 				menu: menu
+// 			}
+// 		})))
+// 		.pipe(gulp.dest(to));
+// });
+
+gulp.task('static', ['clean'], function () {
+	gulp.src(['src/static/**/*']).pipe(gulp.dest(to + 'static/'));
 });
 
 
-gulp.task('default', ['articles', 'index']);
+gulp.task('default', ['clean', 'articles', 'index', 'static']);
