@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var jade = require('gulp-jade');
 var data = require('gulp-data');
+var watch = require('gulp-watch');
 var _ = require('lodash');
 var to = 'build/';
 var jadeOptions = {
@@ -82,9 +83,12 @@ gulp.task('index', ['clean'], function() {
 // 		.pipe(gulp.dest(to));
 // });
 
-gulp.task('static', ['clean'], function () {
+gulp.task('static', function () {
 	gulp.src(['src/static/**/*']).pipe(gulp.dest(to + 'static/'));
 });
 
+gulp.task('watch', function() {
+  gulp.watch('src/static/**/*', ['static']);
+});
 
 gulp.task('default', ['clean', 'articles', 'index', 'static']);
