@@ -78,4 +78,4 @@ gulp.task('static', function() {
 });
 
 
-gulp.task('default', ['articles', 'index', 'static']);
+gulp.task('default', ['articles', 'index']);
