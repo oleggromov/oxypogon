@@ -19,7 +19,7 @@ function getPreview(source) {
 			break;
 		}
 
-		if (tokens[i].type == 'paragraph') {
+		if (tokens[i].type == 'paragraph' || tokens[i].type === 'code') {
 			previewTokens.push(tokens[i]);
 			count++;
 		}
