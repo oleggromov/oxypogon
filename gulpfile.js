@@ -2,25 +2,13 @@ var gulp = require('gulp');
 var jade = require('gulp-jade');
 var data = require('gulp-data');
 var _ = require('lodash');
-
 var to = 'build/';
 var jadeOptions = {
 	basedir: 'src/',
 	pretty: true
 };
 
-var menuGlobal = [
-	{
-		caption: 'Articles',
-		url: '/articles/',
-		active: false,
-	},
-	{
-		caption: 'About me',
-		url: '/about/',
-		active: false
-	}
-];
+var menuGlobal = require('./src/menu.js');
 
 gulp.task('articles', function() {
 	var article = require('./helpers/article');
