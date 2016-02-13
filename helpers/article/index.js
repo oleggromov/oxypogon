@@ -28,7 +28,7 @@ module.exports = function (jadeOptions) {
 
 		options = _.assign(options, jadeOptions.locals);
 
-		options.date = moment(options.date).format('LL');
+		options.date = moment(options.date).format('LLL');
 
 		file.contents = new Buffer(articleTemplate(options));
 		file.path = gutil.replaceExtension(file.path, '.html');

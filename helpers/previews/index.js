@@ -29,7 +29,7 @@ module.exports.getList = function(previews) {
 		preview.url = filePath.replace(file.cwd + '/src/content', '') + '/';
 		preview.preview = markdown.getPreview(source);
 		preview.title = markdown.getTitle(source);
-		preview.date = moment(preview.date).format('LL');
+		preview.date = moment(preview.date).format('LLL');
 
 		previews.push(preview);
 
