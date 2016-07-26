@@ -5,5 +5,29 @@
     "metamd": "^0.3.0",
     "mkdirp": "^0.5.1",
     "moment": "^2.14.1"
-  }
+  },
+  "name": "oxypogon",
+  "description": "Oxypogon.js is a simple static website/blog assembling utility that is build over Node.js.",
+  "version": "0.1.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oleggromov/oxypogon.git"
+  },
+  "keywords": [
+    "static",
+    "site",
+    "generator",
+    "blog",
+    "markdown"
+  ],
+  "author": "Oleg Gromov <npm@oleggromov.com> (http://oleggromov.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oleggromov/oxypogon/issues"
+  },
+  "homepage": "https://github.com/oleggromov/oxypogon#readme"
 }
