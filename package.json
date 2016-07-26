@@ -1,5 +1,5 @@
 {
-  "devDependencies": {
+  "dependencies": {
     "jade": "^1.11.0",
     "marked": "^0.3.5",
     "metamd": "^0.3.0",
@@ -8,7 +8,7 @@
   },
   "name": "oxypogon",
   "description": "Oxypogon.js is a simple static website/blog assembling utility that is build over Node.js.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
