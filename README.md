@@ -15,5 +15,12 @@ I decided to make a simple blog engine named Colibri years ago (maybe near 2009)
 
 ## TODO
 
+features:
+- add RSS support
+- make possible pagination for lists
 - find out how to deal with static content
+- split article into pieces to insert date, tags and other stuff between them
+
+development:
 - combine Reader and Writer into one IO module
+
