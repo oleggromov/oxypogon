@@ -8,10 +8,24 @@ I decided to make a simple blog engine named Colibri years ago (maybe near 2009)
 
 ## Features
 
+- sources in markdown
+  - support for metadata like in MultiMarkdown format
 - assembling static pages
 - lists of pages
 - tags and lists of tags
 - ...
+
+## Underlying technologies
+
+Oxypogon.js was meant to be as simple and lightweight as possible. So there are just a few libraries used for development:
+
+- all content is extracted from markdown sources using [marked](https://github.com/chjj/marked)
+  - I also use [metamd](https://github.com/chrisjaure/metamd) to parse out the metadata from the articles
+- as Oxypogon deals with filesystem and file patterns it uses:
+  - [glob](https://github.com/isaacs/node-glob) for pattern recognition
+  - [mkdirp](https://github.com/substack/node-mkdirp) for recursive directory creation
+- [moment.js](https://github.com/moment/moment) for date formatting
+- [jade](https://github.com/pugjs/pug) (or Pug? I don't understand why is `jade` package available yet) for templating
 
 ## TODO
 
@@ -21,11 +35,13 @@ features:
 - find out how to deal with static content
 - make oxypogon an executable file that looks for the config and builds the site according to it
 - enable inserting dynamic parts into `pieces`
+- add `target="blank"` attribute to all links inside content
 
 development:
 - combine Reader and Writer into one IO module
 - figure out a way to pass tags
 - try some options for templating to find the best way of passing data
+- set default templates in config, not it the sources
 
 promotion:
 - write readme with examples and options
