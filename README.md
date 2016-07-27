@@ -36,6 +36,7 @@ features:
 - make oxypogon an executable file that looks for the config and builds the site according to it
 - enable inserting dynamic parts into `pieces`
 - add `target="blank"` attribute to all links inside content
+- make sure that preview creation works like was desired
 
 development:
 - combine Reader and Writer into one IO module
