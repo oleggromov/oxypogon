@@ -14,6 +14,8 @@ I decided to make a simple blog engine named Colibri years ago (maybe near 2009)
 - lists of pages
 - tags and lists of tags
 - ...
+- rather smart content processing
+	- external links are marked with `target="_blank"`
 
 ## Underlying technologies
 
@@ -35,14 +37,15 @@ features:
 - find out how to deal with static content
 - make oxypogon an executable file that looks for the config and builds the site according to it
 - enable inserting dynamic parts into `pieces`
-- add `target="blank"` attribute to all links inside content
 - make sure that preview creation works like was desired
+- rebuild only pages that were actually changed since the last rebuild?
 
 development:
 - combine Reader and Writer into one IO module
 - figure out a way to pass tags
 - try some options for templating to find the best way of passing data
 - set default templates in config, not it the sources
+- simplify config
 
 promotion:
 - write readme with examples and options
