@@ -38,6 +38,7 @@ features:
 - enable inserting dynamic parts into `pieces`
 - make sure that preview creation works like was desired
 - rebuild only pages that were actually changed since the last rebuild?
+- add support for article writing duration (from-to)
 
 development:
 - combine Reader and Writer into one IO module
