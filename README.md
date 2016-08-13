@@ -40,6 +40,12 @@ features:
 - rebuild only pages that were actually changed since the last rebuild?
 - add support for article writing duration (from-to)
 
+to think of:
+- use the first h2 in the article as a preview if no one was specified
+	- what to do when h2 never appears?
+- live editing
+
+
 development:
 - combine Reader and Writer into one IO module
 - figure out a way to pass tags
