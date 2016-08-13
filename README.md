@@ -34,7 +34,6 @@ Oxypogon.js was meant to be as simple and lightweight as possible. So there are 
 features:
 - add RSS support
 - make possible pagination for lists
-- make oxypogon an executable file that looks for the config and builds the site according to it
 - enable inserting dynamic parts into `pieces`
 - make sure that preview creation works like was desired
 - rebuild only pages that were actually changed since the last rebuild?
