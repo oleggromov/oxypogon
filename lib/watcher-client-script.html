@@ -1,0 +1,7 @@
+<script src="/socket.io/socket.io.js"></script>
+<script>
+var socket = io();
+socket.on('update', function (html) {
+	document.documentElement.innerHTML = html;
+});
+</script>
