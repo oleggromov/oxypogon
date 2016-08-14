@@ -46,7 +46,6 @@ to think of:
 
 
 development:
-- combine Reader and Writer into one IO module
 - figure out a way to pass tags
 - try some options for templating to find the best way of passing data
 - set default templates in config, not it the sources
