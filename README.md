@@ -40,7 +40,7 @@ features:
 - add support for article writing duration (from-to)
 - content:
 	- what to do with articles that are less than preview size?
-	- make inserting lists into the preview possible
+	- make inserting lists into the preview possible (maybe by entering the special 'list mode' which will collect opening and closing tokens respectively)
 
 to think of:
 - use the first h2 in the article as a preview if no one was specified
