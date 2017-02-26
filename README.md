@@ -32,6 +32,7 @@ Oxypogon.js was meant to be as simple and lightweight as possible. So there are 
 ## TODO
 
 features:
+- complete the tags functionality, especially in-menu display which was removed when switching to lists config instead of a separate menu config
 - add RSS support
 - make possible pagination for lists
 - enable inserting dynamic parts into `pieces`
